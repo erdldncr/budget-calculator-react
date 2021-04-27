@@ -14,20 +14,32 @@ function App() {
 
 
 const [expenses,setExpenses]=useState(initialExpense)
-
+const [charge,setCharge]=useState('')
+const [amount,setAmount]=useState('')
+const handleSubmit=(e)=>{
+  e.preventDefault()
+  console.log('handle')
+  const newItem={id:uuid(),charge,amount}
+  setExpenses([...expenses,newItem])
+}
 
   return (
     <>
       <Alert></Alert>
       <h1>Budget Calculator</h1>
       <main className="App">
-        <ExpenseForm/>
+        <ExpenseForm 
+        handleSubmit={handleSubmit}
+        amount={amount}
+        setAmount={setAmount}
+        charge={charge} 
+        setCharge={setCharge} />
         <ExpenseList setExpenses={setExpenses} expenses={expenses} />
       </main>
       <h1>
         Total Spending :{' '} 
         <span className="total">
-      {initialExpense.reduce((total,item)=>total+item.amount,0)}
+      {expenses.reduce((total,item)=>total+item.amount,0)}
         </span>
       </h1>
 
