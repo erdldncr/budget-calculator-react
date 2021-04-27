@@ -11,14 +11,25 @@ const initialExpense=[
 ]
  
 function App() {
+
+
 const [expenses,setExpenses]=useState(initialExpense)
 
 
   return (
     <>
       <Alert></Alert>
-      <ExpenseForm/>
-      <ExpenseList/>
+      <h1>Budget Calculator</h1>
+      <main className="App">
+        <ExpenseForm/>
+        <ExpenseList setExpenses={setExpenses} expenses={expenses} />
+      </main>
+      <h1>
+        Total Spending :{' '} 
+        <span className="total">
+      {initialExpense.reduce((total,item)=>total+item.amount,0)}
+        </span>
+      </h1>
 
     </>
   );
